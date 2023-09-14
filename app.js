@@ -2,6 +2,10 @@ const express = require('express');
 const db = require("./pkg/db/index");
 const playerHandler = require("./handlers/playerHandler");
 const gamesHandler = require("./handlers/gamesHandler");
+const gameRoutes = require('./routes-swagger/gameRoutes');
+const playerRoutes = require('./routes-swagger/playerRoutes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swaggerOptions');
 const { uploadGamePhoto } = require("./handlers/gamesHandler");
 
 const app = express();
@@ -28,6 +32,19 @@ app.get("/players/:id", playerHandler.getOne);
 app.post("/players", playerHandler.create);
 app.patch("/player/:id", playerHandler.update);
 app.delete("/player/:id", playerHandler.delete);
+
+// Serve Swagger UI at localhost:3000
+const swaggerOptions = {
+  explorer: true,
+  swaggerOptions: {
+    url: '/api-docs/swagger.json',
+  },
+};
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));
+
+app.use('/api-docs', gameRoutes);
+app.use('/api-docs', playerRoutes);
+
 
 async function setupApp(_port) {
   await db.init(); // Wait for the database connection to be established
