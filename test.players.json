@@ -1,0 +1,74 @@
+[{
+  "_id": {
+    "$oid": "6500bcc3efd594573e17a182"
+  },
+  "firstName": "Emanuel",
+  "lastName": "Johnson",
+  "dateOfBirth": {
+    "$date": "2003-12-09T00:00:00.000Z"
+  },
+  "__v": 0,
+  "games": [
+    {
+      "$oid": "6500c082efd594573e17a194"
+    },
+    {
+      "$oid": "6500c5226e7f667a2f28aa05"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "6500bcb2efd594573e17a180"
+  },
+  "firstName": "John",
+  "lastName": "Johnson",
+  "dateOfBirth": {
+    "$date": "1992-09-15T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500bef5efd594573e17a187"
+  },
+  "firstName": "Manuel",
+  "lastName": "Williams",
+  "dateOfBirth": {
+    "$date": "1995-07-15T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500bf0befd594573e17a189"
+  },
+  "firstName": "Anthony",
+  "lastName": "Williams",
+  "dateOfBirth": {
+    "$date": "1976-07-12T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500bf1befd594573e17a18b"
+  },
+  "firstName": "Anthony",
+  "lastName": "Joshua",
+  "dateOfBirth": {
+    "$date": "1991-07-12T00:00:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500bf35efd594573e17a18d"
+  },
+  "firstName": "William",
+  "lastName": "Joshua",
+  "dateOfBirth": {
+    "$date": "1991-07-12T00:00:00.000Z"
+  },
+  "__v": 0
+}]

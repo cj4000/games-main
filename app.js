@@ -21,6 +21,13 @@ app.delete("/game/:id", gamesHandler.delete);
 
 app.get("/players/:playerId/games", gamesHandler.listGamesPlayedByPlayer);
 
+app.get("/players/search", playerHandler.search);
+app.get("/players", playerHandler.getAll);
+app.get("/paginated-players", playerHandler.getPaginated);
+app.get("/players/:id", playerHandler.getOne);
+app.post("/players", playerHandler.create);
+app.patch("/player/:id", playerHandler.update);
+app.delete("/player/:id", playerHandler.delete);
 
 app.listen(process.env.PORT, (err) => {
     if (err) {
