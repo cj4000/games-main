@@ -29,9 +29,24 @@ app.post("/players", playerHandler.create);
 app.patch("/player/:id", playerHandler.update);
 app.delete("/player/:id", playerHandler.delete);
 
-app.listen(process.env.PORT, (err) => {
-    if (err) {
-      return console.log("Couldn't start the server");
-    }
-    console.log("Service started succesfully on port 3000");
+async function setupApp(_port) {
+  await db.init(); // Wait for the database connection to be established
+  
+  const port =  _port;
+  return new Promise((resolve, reject) => {
+    const server = app.listen(port, (err) => {
+      if (err) {
+        console.error("Couldn't start the server");
+        reject(err);
+      }
+      console.log(`Service started successfully on port ${port}`);
+      resolve(server);
+    });
   });
+}
+    setupApp(process.env.PORT);
+
+    module.exports = {
+      app,
+      setupApp
+    };
