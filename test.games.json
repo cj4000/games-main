@@ -1,0 +1,53 @@
+[{
+  "_id": {
+    "$oid": "6500c082efd594573e17a194"
+  },
+  "title": "Texas Hold'em",
+  "description": "Classic community card poker.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500c2416e7f667a2f28a9fd"
+  },
+  "title": "Seven Card Stud",
+  "description": "Traditional stud poker with seven cards.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500c5226e7f667a2f28aa05"
+  },
+  "title": "Razz",
+  "description": "Lowball poker, lowest hand wins.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500d00d370c3e3cb58f0cdd"
+  },
+  "title": "Jazz",
+  "description": "Lowball poker, lowest hand wins.",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500e69c020f1c74f89a151b"
+  },
+  "title": "Blackjack",
+  "description": "Blackjack is a casino banking game. It is the most widely played casino banking game in the world. ",
+  "image": "game-7a58e788-bc01-411f-8460-64b87bd159a3-1694557852628.jpeg",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6500ea0cc001522523f824da"
+  },
+  "title": "Roulette",
+  "description": "Roulette is a casino game named after the French word meaning little wheel which was likely developed from the Italian game Biribi.",
+  "image": [
+    "game-e3cd95ba-262f-4762-8086-34ae06494711-1694558732345.jpeg",
+    "game-e3cd95ba-262f-4762-8086-34ae06494711-1694558732349.jpeg"
+  ],
+  "__v": 0
+}]
