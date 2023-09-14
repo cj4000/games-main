@@ -84,9 +84,7 @@ exports.getPaginated = async (req, res) => {
 
 exports.getOne = async (req, res) => {
   try {
-    const game = await Games.findById(req.params.id).populate(
-      "players"
-    );
+    const game = await Games.findById(req.params.id);
 
     res.status(200).json({
       status: "success",
