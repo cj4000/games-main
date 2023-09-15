@@ -8,13 +8,17 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swaggerOptions');
 const { uploadGamePhoto } = require("./handlers/gamesHandler");
 
+// Create an Express application
 const app = express();
 
+// Configure middleware to parse JSON and URL-encoded data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Initialize the database connection
 db.init();
 
+// Define routes for games and players
 app.get("/games/search", gamesHandler.search);
 app.get("/games", gamesHandler.getAll);
 app.get("/paginated-games",gamesHandler.getPaginated)
@@ -33,6 +37,7 @@ app.post("/players", playerHandler.create);
 app.patch("/player/:id", playerHandler.update);
 app.delete("/player/:id", playerHandler.delete);
 
+
 // Serve Swagger UI at localhost:3000
 const swaggerOptions = {
   explorer: true,
@@ -42,10 +47,13 @@ const swaggerOptions = {
 };
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));
 
+
+// Mount Swagger routes for games and players
 app.use('/api-docs', gameRoutes);
 app.use('/api-docs', playerRoutes);
 
 
+// Define a setupApp function to initialize the application
 async function setupApp(_port) {
   await db.init(); // Wait for the database connection to be established
   
@@ -61,9 +69,10 @@ async function setupApp(_port) {
     });
   });
 }
-    setupApp(process.env.PORT);
+// Call setupApp with the specified port and export the app and setupApp function
+setupApp(process.env.PORT);
 
-    module.exports = {
-      app,
-      setupApp
-    };
+module.exports = {
+  app,
+  setupApp
+};

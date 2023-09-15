@@ -1,7 +1,9 @@
 const Player = require("../pkg/casino/playerSchema");
 
+// Get all players
 exports.getAll = async (req, res) => {
   try {
+    // Fetch all players from the database
     const allPlayers = await Player.find();
 
     res.status(200).json({
@@ -19,8 +21,10 @@ exports.getAll = async (req, res) => {
   }
 };
 
+// Get paginated players
 exports.getPaginated = async (req, res) => {
   try {
+    // Parse query parameters for pagination (default page: 1, default limit: 2)
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 2;
 
@@ -50,6 +54,7 @@ exports.getPaginated = async (req, res) => {
   }
 };
 
+// Get a single player by ID
 exports.getOne = async (req, res) => {
   try {
     const player = await Player.findById(req.params.id);
@@ -68,6 +73,7 @@ exports.getOne = async (req, res) => {
   }
 };
 
+// Update a player's data
 exports.update = async (req, res) => {
   try {
     const player = await Player.findByIdAndUpdate(req.params.id, req.body, {
@@ -89,6 +95,7 @@ exports.update = async (req, res) => {
   }
 };
 
+// Delete a player by ID
 exports.delete = async (req, res) => {
   try {
     await Player.findByIdAndDelete(req.params.id);
@@ -105,6 +112,7 @@ exports.delete = async (req, res) => {
   }
 };
 
+// Create a new player
 exports.create = async (req, res) => {
   try {
     const newPlayer = await Player.create(req.body);
@@ -122,10 +130,13 @@ exports.create = async (req, res) => {
   }
 };
 
+// Search for players by first name or last name (case-insensitive)
 exports.search = async (req, res) => {
   try {
+    // Extract the search query from query parameters
     const searchQuery = req.query.query;
 
+    // Use a regular expression to search for players by first name or last name
     const searchResults = await Player.find({
       $or: [
         { firstName: { $regex: new RegExp(searchQuery, "i") } },

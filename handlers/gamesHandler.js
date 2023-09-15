@@ -4,13 +4,17 @@ const Player = require("../pkg/casino/playerSchema")
 const multer = require("multer");
 const uuid = require("uuid");
 
+// Generate a unique image ID using UUID
 const imageId = uuid.v4();
 
+// Configure Multer storage for file uploads
 const multerStorage = multer.diskStorage({
   destination: (req, file, callback) => {
+    // Define the filename for uploaded images based on the file type and unique ID
     callback(null, "pkg/img");
   },
   filename: (req, file, callback) => {
+    // Define the filename for uploaded images based on the file type and unique ID
     const type = file.mimetype.split("/")[1];
     callback(null, `game-${imageId}-${Date.now()}.${type}`);
   },
@@ -23,16 +27,20 @@ const multerFilter = (req, file, callback) => {
     callback(new Error("File not supported"), false);
   }
 };
+
+// Configure Multer with defined storage and filter
 const upload = multer({
   storage: multerStorage,
   fileFilter: multerFilter,
   limits: {
-    fileSize: 10 * 1024 * 1024,
+    fileSize: 10 * 1024 * 1024, // Limit file size to 10 MB
   },
 });
 
+// Middleware for handling file uploads
 exports.uploadGamePhoto = upload.array("image", 5);
 
+// Get all games
 exports.getAll = async (req, res) => {
   try {
     const allGames = await Games.find();
@@ -53,11 +61,13 @@ exports.getAll = async (req, res) => {
 
 exports.getPaginated = async (req, res) => {
   try {
+    // Parse query parameters for pagination
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 2;
 
     const skip = (page - 1) * limit;
 
+    // Retrieve paginated games and calculate total game count
     const allPaginatedGames = await Games.find()
       .skip(skip)
       .limit(limit);
@@ -82,6 +92,7 @@ exports.getPaginated = async (req, res) => {
   }
 };
 
+// Get a single game by ID
 exports.getOne = async (req, res) => {
   try {
     const game = await Games.findById(req.params.id);
@@ -100,22 +111,26 @@ exports.getOne = async (req, res) => {
   }
 };
 
+// Update a game
 exports.update = async (req, res) => {
   try {
     const gameId = req.params.id;
     const updateData = req.body;
 
+    // Handle image file uploads
     const imageFiles = req.files;
     if (imageFiles && imageFiles.length > 0) {
       const imageFileNames = imageFiles.map((file) => file.filename);
       updateData.image = imageFileNames;
     }
 
+    // Update the game data in the database
     const updatedGame = await Games.findByIdAndUpdate(gameId, updateData, {
       new: true,
       runValidators: true,
     });
 
+    // Check if the game was found
     if (!updatedGame) {
       return res.status(404).json({
         status: "fail",
@@ -123,6 +138,7 @@ exports.update = async (req, res) => {
       });
     }
 
+    // Return the updated game data
     res.status(200).json({
       status: "success",
       data: {
@@ -137,8 +153,7 @@ exports.update = async (req, res) => {
   }
 };
 
-
-
+// Delete a game
 exports.delete = async (req, res) => {
   try {
     await Games.findByIdAndDelete(req.params.id);
@@ -155,20 +170,24 @@ exports.delete = async (req, res) => {
   }
 };
 
+// Create a new game
 exports.create = async (req, res) => {
   try {
-
     console.log("req.file:", req.file); 
     console.log("req.body:", req.body)
-
+   
+    // Handle image file uploads
     const imageFiles = req.files;
     const imageFileNames = imageFiles.map((file) => file.filename);
-
+    
+    // Create a new game with the provided data
     const newGame = await Games.create({
       title: req.body.title,
       description: req.body.description,
       image: imageFileNames,
     });
+
+    // Return the newly created game data
     res.status(201).json({
       status: "success",
       data: {
@@ -183,8 +202,10 @@ exports.create = async (req, res) => {
   }
 };
 
+// Search for games by title or other attributes
 exports.search = async (req, res) => {
   try {
+    // Extract the search query from query parameters
     const searchQuery = req.query.query; 
     console.log("Search Query:", searchQuery);
 
