@@ -53,7 +53,7 @@ PORT=3000
 DATABASE=mongodb+srv://jovanaconik:<PASSWORD>@cluster1.m4lazem.mongodb.net/?retryWrites=true&w=majority
 DATABASE_PASSWORD=(put your password)
 ```
-- ###### **<PASSWORD> must be in capital letters**
+- **<"PASSWORD"> must be in capital letters**
 
 
 #### 5. Start the server:
