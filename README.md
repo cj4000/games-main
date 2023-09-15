@@ -1,5 +1,5 @@
 
-## Casino Games and Players Management
+## Application for casino games and player management
 
 This is a backend application for managing casino games and players via a REST API. It provides features for managing games and players, including CRUD operations, pagination, and search functionality.
 
