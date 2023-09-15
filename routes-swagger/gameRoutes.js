@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const gamesHandler = require('../handlers/gamesHandler');
 
+
 // List all games
 /**
  * @swagger
@@ -18,6 +19,8 @@ const gamesHandler = require('../handlers/gamesHandler');
 
 router.get('/games', gamesHandler.getAll);
 
+
+// Get one game by ID
 /**
  * @swagger
  * /games/{id}:

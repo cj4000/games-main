@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const playerHandler = require('../handlers/playerHandler');
 
+
+// List all players
 /**
  * @swagger
  *  /players:
@@ -15,7 +17,7 @@ const playerHandler = require('../handlers/playerHandler');
  *         description: Internal server error
  */
 
-// List all players
+
 router.get('/players', playerHandler.getAll);
 
 
